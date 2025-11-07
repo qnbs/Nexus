@@ -1,6 +1,7 @@
 
 
 
+
 import React from 'react';
 import { useNexus } from '../context/NexusContext';
 import { useLocalization } from '../context/LocalizationContext';
@@ -17,7 +18,6 @@ import CommandPalette from './CommandPalette';
 import SettingsModal from './SettingsModal';
 import HelpGuide from './HelpGuide';
 import MobilePanel from './MobilePanel';
-// FIX: Added missing import for BottomNavBar component.
 import BottomNavBar from './BottomNavBar';
 import { ExclamationTriangleIcon, InformationCircleIcon } from './IconComponents';
 

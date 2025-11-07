@@ -1,4 +1,3 @@
-// FIX: Added import for React to resolve namespace errors.
 import React, { useState, useCallback } from 'react';
 import { ArticleData } from '../types';
 import { useLocalization } from '../context/LocalizationContext';

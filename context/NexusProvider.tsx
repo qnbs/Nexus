@@ -6,7 +6,6 @@ import { PWAContext } from './AppContext';
 import { AppSettings, Language, Locale, SessionSnapshot } from '../types';
 import * as dbService from '../services/dbService';
 import { DEFAULT_SETTINGS } from '../App';
-// FIX: UIProvider is exported from UIProvider.tsx, not UIContext.ts
 import { useUI } from './UIContext';
 import { UIProvider } from './UIProvider';
 

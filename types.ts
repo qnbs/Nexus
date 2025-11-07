@@ -1,4 +1,5 @@
 
+
 import type { Chat } from '@google/genai';
 import type { Dispatch, SetStateAction, RefObject, ChangeEvent } from 'react';
 import { AppState, AppAction } from './state/appReducer';
@@ -165,7 +166,6 @@ export interface LocalizationContextType {
 
 export interface ArticleContextType {
     article: ArticleData;
-    // FIX: Use imported `Dispatch` and `SetStateAction` types directly instead of with `React.` namespace.
     setArticle: Dispatch<SetStateAction<ArticleData | null>>;
     isBookmarked: boolean;
     settings: AppSettings;
