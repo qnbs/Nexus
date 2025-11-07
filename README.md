@@ -7,8 +7,6 @@
 ## English
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/qnbs/Nexus)
 
-[![Open in AI Studio](https://img.shields.io/badge/Live%20Demo-Open%20in%20AI%20Studio-blue?style=for-the-badge&logo=google&logoColor=white)](https://ai.studio/apps/drive/1e5Yc-ommOORZdnzXxOBpCWtjJw5dIypi)
-
 > **Nexus is not merely an information retrieval tool; it is a dynamic, AI-powered cognitive partner designed to transform learning from a passive act of consumption into an immersive, interconnected journey of discovery.**
 
 Nexus transcends the traditional encyclopedia model by weaving together disparate concepts, visualizing abstract ideas, and personalizing the educational path for every user. It operates on three foundational pillars:
@@ -54,8 +52,6 @@ Nexus is engineered with a suite of state-of-the-art features to redefine knowle
 
 Experience the full power of Nexus instantly, with no setup required. This live demonstration is hosted on Google AI Studio, a cutting-edge platform for developing and sharing AI-powered applications.
 
-**[Open the Nexus App in AI Studio](https://ai.studio/apps/drive/1e5Yc-ommOORZdnzXxOBpCWtjJw5dIypi)**
-
 #### What is Google AI Studio?
 [Google AI Studio](https://ai.google.dev/aistudio) is a web-based IDE that streamlines prototyping with the Google Gemini API. Its "Apps" feature allows developers to host and share full-stack web applications like Nexus, backed by Google's robust infrastructure. This ensures you always have access to the latest version, running seamlessly and at scale.
 
@@ -76,8 +72,6 @@ Experience the full power of Nexus instantly, with no setup required. This live 
 ---
 <a name="deutsch"></a>
 ## Deutsch
-
-[![Open in AI Studio](https://img.shields.io/badge/Live%20Demo-Open%20in%20AI%20Studio-blue?style=for-the-badge&logo=google&logoColor=white)](https://ai.studio/apps/drive/1e5Yc-ommOORZdnzXxOBpCWtjJw5dIypi)
 
 > **Nexus ist nicht nur ein Werkzeug zur Informationsbeschaffung; es ist ein dynamischer, KI-gestützter kognitiver Partner, der das Lernen von einem passiven Konsumakt in eine immersive, vernetzte Entdeckungsreise verwandelt.**
 
@@ -123,8 +117,6 @@ Nexus ist mit einer Reihe hochmoderner Funktionen ausgestattet, um die Wissenser
 ### 🚀 Live auf Google AI Studio
 
 Erleben Sie die volle Leistung von Nexus sofort und ohne jegliche Einrichtung. Diese Live-Demonstration wird auf Google AI Studio gehostet, einer hochmodernen Plattform zur Entwicklung und zum Teilen von KI-gestützten Anwendungen.
-
-**[Öffnen Sie die Nexus-App in AI Studio](https://ai.studio/apps/drive/1e5Yc-ommOORZdnzXxOBpCWtjJw5dIypi)**
 
 #### Was ist Google AI Studio?
 [Google AI Studio](https://ai.google.dev/aistudio) ist eine webbasierte IDE, die das Prototyping mit dem Google Gemini API optimiert. Die "Apps"-Funktion ermöglicht es Entwicklern, vollständige Webanwendungen wie Nexus zu hosten und zu teilen, unterstützt durch die robuste Infrastruktur von Google. Dies stellt sicher, dass Sie immer Zugriff auf die neueste Version haben, die nahtlos und skalierbar läuft.
