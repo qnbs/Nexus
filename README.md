@@ -5,6 +5,7 @@
 ---
 <a name="english"></a>
 ## English
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/qnbs/Nexus)
 
 [![Open in AI Studio](https://img.shields.io/badge/Live%20Demo-Open%20in%20AI%20Studio-blue?style=for-the-badge&logo=google&logoColor=white)](https://ai.studio/apps/drive/1e5Yc-ommOORZdnzXxOBpCWtjJw5dIypi)
 
