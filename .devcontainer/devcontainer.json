@@ -1,0 +1,45 @@
+{
+	"name": "Nexus Knowledge Hub (Node.js & TypeScript)",
+	// Use a pre-built image with Node.js and TypeScript.
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
+
+	// Features to add to the dev container.
+	"features": {
+		"ghcr.io/devcontainers/features/github-cli:1": {}
+	},
+
+	// Forward the port the app runs on.
+	"forwardPorts": [8080],
+
+	// Configure VS Code settings and extensions.
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"editor.formatOnSave": true,
+				"[typescript]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode"
+				},
+				"[typescriptreact]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode"
+				},
+				"[json]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode"
+				}
+			},
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode",
+				"bradlc.vscode-tailwindcss",
+				"eamodio.gitlens",
+				"GitHub.copilot"
+			]
+		}
+	},
+
+	// Install a static server and then run it on attach.
+	"postCreateCommand": "npm install -g serve",
+	"postAttachCommand": "serve -s -l 8080 .",
+
+	// Comment out connect as root since we're using a non-root user.
+	"remoteUser": "node"
+}

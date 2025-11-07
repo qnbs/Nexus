@@ -1,0 +1,462 @@
+{
+    "common": {
+        "close": "Schließen",
+        "loading": "Denke nach...",
+        "retry": "Erneut versuchen",
+        "ok": "OK",
+        "copyPrompt": "Prompt kopieren",
+        "copy": "Kopieren",
+        "copied": "Kopiert!",
+        "save": "Speichern",
+        "search": "Suchen",
+        "exploreTopic": "Ein Thema erkunden...",
+        "openMenu": "Menü öffnen",
+        "generate": "Generieren"
+    },
+    "searchbar": {
+        "cosmicLeap": {
+            "title": "Kosmischer Sprung: Eine überraschende Verbindung finden"
+        }
+    },
+    "welcome": {
+        "title": "Willkommen bei Nexus",
+        "subtitle": "Ihr KI-gestützter Wissens-Hub. Beginnen Sie mit einer Suche oder erkunden Sie die Verbindungen zwischen diesen faszinierenden Themen."
+    },
+    "starterTopics": {
+        "Physik & Kosmos": [
+            { "title": "Die Physik der Schwarzen Löcher", "description": "Reisen Sie an den Rand der Raumzeit und erforschen Sie diese kosmischen Mysterien." },
+            { "title": "Quantenverschränkung", "description": "Erforschen Sie die 'spukhafte Fernwirkung', die selbst Einstein verblüffte." },
+            { "title": "Die Natur der Dunklen Materie", "description": "Was ist die unsichtbare Substanz, die den größten Teil der Masse des Universums ausmacht?" },
+            { "title": "Supernovae und Neutronensterne", "description": "Der explosive Tod von Sternen und die ultradichten Objekte, die sie zurücklassen." }
+        ],
+        "Biologie & Erde": [
+            { "title": "CRISPR Gen-Editierung", "description": "Eine revolutionäre Technologie, die es Wissenschaftlern ermöglicht, den Code des Lebens umzuschreiben." },
+            { "title": "Mykologie und Pilz-Netzwerke", "description": "Entdecken Sie die Geheimnisse des 'Wood Wide Web', das ganze Wälder verbindet." },
+            { "title": "Biolumineszenz", "description": "Wie und warum Lebewesen in den dunklen Tiefen des Ozeans ihr eigenes Licht erzeugen." },
+            { "title": "Die Kambrische Explosion", "description": "Das mysteriöse Ereignis vor 541 Millionen Jahren, als die meisten großen Tierstämme erschienen." }
+        ],
+        "Geschichte & Kultur": [
+            { "title": "Die Bibliothek von Alexandria", "description": "Die Geschichte des größten Wissenszentrums der antiken Welt und seiner tragischen Zerstörung." },
+            { "title": "Geschichte des Impressionismus", "description": "Wie eine revolutionäre Kunstbewegung die Art und Weise, wie wir die Welt sehen, verändert hat." },
+            { "title": "Navigationstechniken der Wikinger", "description": "Wie die Wikinger mit Sonnensteinen und Himmelskompassen über die offene See navigierten." },
+            { "title": "Der Stein von Rosetta", "description": "Die Entdeckung, die die Geheimnisse der altägyptischen Hieroglyphen entschlüsselte." }
+        ],
+        "Technologie & Zukunft": [
+            { "title": "Wie neuronale Netze funktionieren", "description": "Ein Blick ins Innere der vom Gehirn inspirierten Algorithmen, die die moderne KI antreiben." },
+            { "title": "Die Zukunft der Fusionsenergie", "description": "Können wir die Kraft der Sonne auf der Erde für saubere, unbegrenzte Energie nachbilden?" },
+            { "title": "Die Geschichte des Internets", "description": "Von einem Militärprojekt zu einem globalen Netzwerk, das Milliarden verbindet." },
+            { "title": "Die Ethik der künstlichen Intelligenz", "description": "Erforschung der komplexen moralischen Fragen, die durch zunehmend intelligente Maschinen aufgeworfen werden." }
+        ],
+        "Kuriositäten & Bizarres": [
+            { "title": "Der große Emu-Krieg", "description": "Die bizarre, wahre Geschichte von Australiens Militäroperation gegen Vögel." },
+            { "title": "Die Tanzplage von 1518", "description": "Das mysteriöse historische Ereignis, bei dem Hunderte von Menschen tagelang unkontrolliert tanzten." },
+            { "title": "Das Voynich-Manuskript", "description": "Ein jahrhundertealter, illustrierter Kodex, der in einer unbekannten und unentschlüsselten Schrift verfasst ist." },
+            { "title": "Kugelblitze", "description": "Untersuchung des seltenen und unerklärten atmosphärischen Phänomens leuchtender Kugeln." }
+        ]
+    },
+    "article": {
+        "creating": "Erstelle Artikel...",
+        "error": {
+            "title": "Ein Fehler ist aufgetreten"
+        },
+        "conclusion": "Fazit",
+        "keyMoments": "Schlüsselmomente",
+        "learnMore": "Mehr erfahren →",
+        "generate": "Generieren",
+        "generateImage": "Bild generieren",
+        "generateVideo": "Video generieren",
+        "generatingImage": "Generiere Bild...",
+        "editingImage": "Bearbeite Bild...",
+        "imagePrompt": "Bild-Prompt",
+        "generateAllImages": "Alle {{count}} fehlenden Bilder generieren",
+        "generatingAllImages": "Generiere {{count}} Bild(er)...",
+        "bookmark": {
+            "add": "Lesezeichen hinzufügen",
+            "remove": "Lesezeichen entfernen"
+        },
+        "addToPath": {
+            "title": "Zum Lernpfad hinzufügen",
+            "heading": "Zu Pfad hinzufügen",
+            "noPaths": "Noch keine Pfade.",
+            "create": "+ Neuen Pfad erstellen",
+            "newPathPlaceholder": "Name des neuen Pfades..."
+        },
+        "editImage": {
+            "title": "Bild mit KI bearbeiten",
+            "promptLabel": "Beschreiben Sie Ihre Änderungen:",
+            "placeholder": "z. B. mache es Nacht, füge eine Katze hinzu..."
+        },
+        "video": {
+            "loadingMessages": [
+                "Initialisiere Videosynthese...",
+                "Kompositiere Frames...",
+                "Dies kann einige Minuten dauern...",
+                "Rendere finale Ausgabe...",
+                "Fast geschafft..."
+            ],
+            "status": {
+                "start": "Starte Videogenerierung..."
+            }
+        },
+        "export": {
+            "title": "Artikel exportieren",
+            "formats": {
+                "txt": "als Text (.txt)",
+                "md": "als Markdown (.md)",
+                "html": "als HTML (.html)",
+                "json": "als JSON (.json)"
+            }
+        }
+    },
+    "summary": {
+        "tldr": "Zfsg.",
+        "eli5": "EWI5",
+        "keyPoints": "Kernaussagen",
+        "analogy": "Analogie",
+        "generating": "Generiere {{type}}..."
+    },
+    "synapse": {
+        "title": "Synapsen-Graph",
+        "description": "Entdecken Sie, wie alles zusammenhängt. Erforschen Sie verwandte Themen oder wagen Sie einen Sprung ins Unerwartete.",
+        "cosmicLeap": "Kosmischer Sprung",
+        "relevance": "Relevanz:",
+        "summary": "Zusammenfassung:"
+    },
+    "athena": {
+        "title": "Athena KI",
+        "welcomeMessage": "Hallo! Ich bin Athena, Ihre KI-Assistentin. Ich habe den Artikel über \"{{title}}\" gelesen. Wie kann ich Ihnen helfen, ihn besser zu verstehen?",
+        "thinking": "Denke nach...",
+        "error": "Es tut mir leid, ich habe im Moment Schwierigkeiten zu antworten. Bitte versuchen Sie es gleich noch einmal.",
+        "placeholder": "Eine Folgefrage stellen...",
+        "placeholderLoading": "Warte auf Artikel...",
+        "loadingArticle": "Lese mich in '{{topic}}' ein...",
+        "fallbackQuestions": [
+            "Fasse dies in 3 Stichpunkten zusammen",
+            "Was sind die Schlüsselkonzepte?",
+            "Erkläre das Fazit"
+        ],
+        "previousArticleContextPreamble": "\n\nAls zusätzlicher Kontext hat der Benutzer kürzlich diese Artikel angesehen. Beziehen Sie sich NUR dann darauf, wenn der Benutzer eine vergleichende Frage stellt: \n\"\"\"{{context}}\"\"\"",
+        "systemInstruction": "Sie sind Athena, eine hilfreiche und aufschlussreiche KI-Wissensassistentin. Ihr Ziel ist es, dem Benutzer zu helfen, den bereitgestellten Artikel zu verstehen. Ihnen wurde der vollständige Text eines Artikels mit folgendem Inhalt gegeben, und alle Benutzerfragen sollten in Bezug darauf beantwortet werden. Beziehen Sie sich in Ihren Antworten nicht auf diese Präambel. Sprechen Sie immer auf Deutsch. Artikelinhalt: \"\"\"{{articleContext}}\"\"\"{{previousArticlesContext}}"
+    },
+    "interaction": {
+        "toolbarLabel": "Text-Interaktionswerkzeuge",
+        "define": "Definieren",
+        "explain": "Erklären",
+        "visualize": "Visualisieren",
+        "modal": {
+            "defineTitle": "Definition: {{text}}",
+            "explainTitle": "Erklärung: {{text}}",
+            "visualizeTitle": "Visualisierung: {{text}}",
+            "thinking": "Denke nach...",
+            "visualizing": "Visualisiere..."
+        }
+    },
+    "panels": {
+        "history": {
+            "title": "Verlauf"
+        },
+        "bookmarks": {
+            "title": "Lesezeichen"
+        },
+        "learningPaths": {
+            "title": "Lernpfade",
+            "progress": "{{completed}}/{{total}} abgeschlossen",
+            "goToArticle": "Zum Artikel",
+            "removeFromPath": "Aus Pfad entfernen",
+            "deletePath": "Pfad löschen",
+            "moveUp": "Nach oben",
+            "moveDown": "Nach unten",
+            "noArticles": "Noch keine Artikel in diesem Pfad.",
+            "noPathsTitle": "Keine Lernpfade erstellt",
+            "noPathsDescription": "Sie können einen neuen Pfad erstellen, indem Sie in der Artikelansicht einen Artikel hinzufügen."
+        },
+        "snapshots": {
+            "title": "Schnappschüsse"
+        },
+        "imageLibrary": {
+            "title": "Bilder-Bibliothek",
+            "sourceArticle": "Quellartikel",
+            "confirmDelete": "Sind Sie sicher, dass Sie dieses Bild endgültig löschen möchten?",
+            "editedPrompt": "(Bearbeitet) {{editPrompt}} -- Original: {{originalPrompt}}"
+        },
+        "settings": {
+            "title": "Einstellungen"
+        },
+        "help": {
+            "title": "Hilfe",
+            "aboutApp": "Über die App"
+        },
+        "noEntries": "Keine Einträge.",
+        "deleteEntry": "Eintrag löschen",
+        "clearAll": "Alle {{title}} löschen"
+    },
+    "commandPalette": {
+        "open": "Befehlspalette",
+        "placeholder": "Befehl ausführen oder suchen...",
+        "noResults": "Keine Befehle gefunden.",
+        "section": {
+            "navigation": "Navigation",
+            "actions": "Aktionen",
+            "data": "Daten",
+            "bookmarks": "Lesezeichen",
+            "history": "Verlauf"
+        },
+        "command": {
+            "viewHistory": "Verlauf anzeigen",
+            "viewBookmarks": "Lesezeichen anzeigen",
+            "viewPaths": "Lernpfade anzeigen",
+            "viewSnapshots": "Schnappschüsse anzeigen",
+            "openSettings": "Einstellungen öffnen",
+            "viewHelp": "Hilfe anzeigen",
+            "cosmicLeap": "Kosmischer Sprung",
+            "genImages": "Alle Bilder generieren",
+            "saveSnapshot": "Sitzungs-Schnappschuss speichern",
+            "exportData": "Daten exportieren",
+            "importData": "Daten importieren",
+            "installApp": "App installieren"
+        }
+    },
+    "settings": {
+        "title": "Einstellungen",
+        "close": "Einstellungen schließen",
+        "appearance": {
+            "title": "Erscheinungsbild",
+            "accentColor": {
+                "label": "Akzentfarbe",
+                "description": "Wählen Sie die Hauptfarbe für UI-Elemente.",
+                "amber": "Bernstein",
+                "sky": "Himmelblau",
+                "rose": "Rose",
+                "emerald": "Smaragd"
+            },
+            "font": {
+                "label": "Schriftfamilie",
+                "description": "Wählen Sie die Schriftart für die App.",
+                "artistic": "Künstlerisch",
+                "modern": "Modern"
+            },
+            "textSize": {
+                "label": "Textgröße",
+                "description": "Passen Sie die Textgröße in Artikeln an.",
+                "sm": "Klein",
+                "base": "Standard",
+                "lg": "Groß"
+            }
+        },
+        "content": {
+            "title": "Inhalt & KI",
+            "language": {
+                "label": "Sprache",
+                "description": "Legen Sie die Anzeige- und Inhaltssprache fest.",
+                "de": "Deutsch",
+                "en": "English"
+            },
+            "articleLength": {
+                "label": "Artikellänge",
+                "description": "Legen Sie die bevorzugte Länge für generierte Artikel fest.",
+                "concise": "Kompakt (ca. 300 Wörter)",
+                "standard": "Standard (ca. 600 Wörter)",
+                "in-depth": "Ausführlich (900+ Wörter)"
+            },
+            "imageStyle": {
+                "label": "Bildstil",
+                "description": "Definieren Sie den künstlerischen Stil für KI-generierte Bilder.",
+                "photorealistic": "Fotorealistisch",
+                "artistic": "Künstlerisch",
+                "vintage": "Vintage",
+                "minimalist": "Minimalistisch"
+            },
+            "autoLoad": {
+                "label": "Bilder automatisch laden",
+                "description": "Bilder automatisch generieren, wenn ein Artikel geladen wird."
+            },
+            "synapseDensity": {
+                "label": "Synapsendichte",
+                "description": "Anzahl der verwandten Themen im Synapsen-Graph."
+            }
+        },
+        "data": {
+            "title": "Datenverwaltung",
+            "installApp": {
+                "label": "Nexus installieren",
+                "description": "Fügen Sie Nexus für ein natives App-Erlebnis zu Ihrem Startbildschirm hinzu, um Offline-Zugriff und schnellere Ladezeiten zu ermöglichen.",
+                "button": "Installieren"
+            },
+            "clearHistory": "Verlauf löschen",
+            "clearBookmarks": "Lesezeichen löschen",
+            "clearPaths": "Lernpfade löschen",
+            "clearSnapshots": "Schnappschüsse löschen",
+            "clearImageLibrary": "Bilder-Bibliothek löschen",
+            "export": "Alle Daten exportieren",
+            "import": "Daten importieren"
+        }
+    },
+    "help": {
+        "title": "Nexus Hilfe & Leitfaden",
+        "close": "Hilfefenster schließen",
+        "tab": {
+            "tutorial": "Anleitung",
+            "glossary": "Glossar",
+            "about": "Über"
+        },
+        "tutorialContent": {
+            "intro": "Willkommen bei Nexus! Diese Anleitung führt Sie durch die Kernfunktionen, damit Sie das Beste aus Ihrer Wissenserkundung herausholen können.",
+            "sections": [
+                {
+                    "title": "Ihre Reise beginnen",
+                    "p1": "Es gibt mehrere Möglichkeiten, mit der Erkundung zu beginnen:",
+                    "list": [
+                        { "label": "Direkte Suche", "text1": "Geben Sie ein beliebiges Thema, das Sie neugierig macht, in die Hauptsuchleiste ein." },
+                        { "label": "Starter-Themen", "text1": "Wählen Sie eines der kuratierten Themen auf dem Begrüßungsbildschirm für sofortige Inspiration." },
+                        { "label": "Kosmischer Sprung", "text1": "Klicken Sie auf die Schaltfläche 'Kosmischer Sprung', um zu einem zufälligen, überraschenden Thema zu gelangen." }
+                    ]
+                },
+                {
+                    "title": "Mit einem Artikel interagieren",
+                    "p1": "Sobald ein Artikel generiert ist, stehen Ihnen mehrere Werkzeuge zur Verfügung:",
+                    "list": [
+                        { "label": "Text-Interaktion", "text1": "Markieren Sie ein beliebiges Wort oder einen Satz, um ein Schnellmenü aufzurufen. Sie können", "highlight": "Definieren, Erklären und Visualisieren.", "text2": "Die KI liefert eine prägnante Antwort in einem Pop-up-Fenster." },
+                        { "label": "Bilderzeugung", "text1": "Jeder Abschnitt hat einen Prompt für ein beschreibendes Bild. Klicken Sie auf 'Bild generieren', um die KI eine visuelle Darstellung erstellen zu lassen." },
+                        { "label": "KI-Bildbearbeitung", "text1": "Fahren Sie mit der Maus über ein generiertes Bild und klicken Sie auf das Bearbeitungssymbol. Sie können dann einen Text-Prompt eingeben, um das Bild zu ändern, z. B. 'ändere die Jahreszeit zu Winter' oder 'füge eine Katze hinzu'." },
+                        { "label": "Schnellzusammenfassungen", "text1": "Verwenden Sie die Zusammenfassungs-Schaltflächen (Zfsg., EWI5 usw.) unter der Einleitung, um unterschiedliche Perspektiven auf den Inhalt zu erhalten." },
+                        { "label": "Zeitleiste", "text1": "Bei historischen Themen bietet eine Zeitleiste mit Schlüsselereignissen einen chronologischen Überblick. Sie können auf Ereignisse klicken, um mehr zu erfahren." }
+                    ]
+                },
+                {
+                    "title": "Im Gespräch mit Athena",
+                    "p1": "Das Panel auf der rechten Seite ist Ihr KI-Copilot, Athena. Sie hat den vollen Kontext des Artikels, den Sie gerade lesen.",
+                    "list": [
+                        { "label": "Fragen Sie alles", "text1": "Bitten Sie um Klärung, tiefere Einblicke oder wie Konzepte miteinander in Beziehung stehen." },
+                        { "label": "Vorgeschlagene Fragen", "text1": "Nutzen Sie die Vorschlags-Chips, um durchdachte, von der KI kuratierte Fragen zu stellen." }
+                    ]
+                },
+                {
+                    "title": "Wissen vernetzen",
+                    "p1": "Nexus wurde entwickelt, um Ihnen zu helfen, Verbindungen zwischen Themen zu entdecken.",
+                    "list": [
+                        { "label": "Synapsen-Graph", "text1": "Am Ende jedes Artikels zeigt Ihnen dieser Graph verwandte Themen. Klicken Sie auf einen Knoten, um einen neuen Artikel zu generieren und Ihre Reise fortzusetzen." },
+                        { "label": "In-Artikel-Links", "text1": "Ein Klick auf Ereignisse in der Zeitleiste startet ebenfalls eine Suche nach diesem neuen Thema." },
+                        { "label": "Kosmischer Sprung", "text1": "Nutzen Sie diese Funktion aus dem Synapsen-Graph, um zu einem entfernt verwandten, aber interessanten neuen Thema zu springen." }
+                    ]
+                },
+                {
+                    "title": "Ihre Daten verwalten",
+                    "p1": "Nexus speichert alle Ihre Daten in Ihrem Browser. Greifen Sie über die Symbole in der oberen rechten Kopfzeile darauf zu und verwalten Sie sie:",
+                    "list": [
+                        { "label": "Verlauf", "text1": "Besuchen Sie erneut Themen, die Sie kürzlich erkundet haben." },
+                        { "label": "Lesezeichen", "text1": "Speichern Sie Ihre bevorzugten oder wichtigsten Artikel für einen einfachen Zugriff." },
+                        { "label": "Lernpfade", "text1": "Gruppieren Sie verwandte Artikel, um einen benutzerdefinierten Lehrplan zu einem Thema zu erstellen." },
+                        { "label": "Schnappschüsse", "text1": "Speichern Sie eine gesamte Sitzung – einschließlich Artikel, Chatverlauf und verwandter Themen –, um sie später wiederherzustellen." }
+                    ]
+                }
+            ]
+        },
+        "glossaryContent": {
+            "intro": "Dieses Glossar erklärt die wichtigsten Begriffe und Konzepte innerhalb der Nexus-Anwendung.",
+            "sections": [
+                {
+                    "title": "Kernkonzepte",
+                    "terms": [
+                        { "name": "Athena KI-Copilot", "description": "Der kontextbezogene Chat-Assistent, der für jeden Artikel verfügbar ist. Er hilft Ihnen, tiefer in die Materie einzutauchen, indem er Fragen beantwortet." },
+                        { "name": "Synapsen-Graph", "description": "Eine interaktive, knotenbasierte Visualisierung, die Themen im Zusammenhang mit dem aktuellen Artikel anzeigt und zum Erkunden anregt." },
+                        { "name": "Kosmischer Sprung", "description": "Eine Funktion, die ein überraschendes, entfernt verwandtes Thema vorschlägt, um Ihren Horizont auf unerwartete Weise zu erweitern." },
+                        { "name": "KI-Bildbearbeitung", "description": "Die Fähigkeit, ein generiertes Bild durch die Eingabe eines textbasierten Prompts zu verändern. Dies ermöglicht die Feinabstimmung von Visualisierungen direkt im Artikel." }
+                    ]
+                },
+                {
+                    "title": "Datenverwaltung",
+                    "terms": [
+                        { "name": "Lernpfad", "description": "Eine vom Benutzer kuratierte Sammlung von Artikeln. Sie können Pfade erstellen, um Themen für fokussiertes Lernen zu gruppieren." },
+                        { "name": "Sitzungs-Schnappschuss", "description": "Ein vollständiger Speicherzustand Ihrer aktuellen Sitzung, einschließlich des Hauptartikels, des Chatverlaufs mit Athena und der Themen des Synapsen-Graphen. Schnappschüsse können jederzeit wiederhergestellt werden." }
+                    ]
+                }
+            ]
+        },
+        "aboutContent": {
+            "intro": "Nexus ist ein KI-gestützter Wissens-Hub, der entwickelt wurde, um Verbindungen aufzudecken und Lernen in eine immersive Entdeckungsreise zu verwandeln.",
+            "pillars": {
+                "title": "Drei Grundpfeiler",
+                "personalization": "**Personalisierung:** Passen Sie Nexus an Ihre Vorlieben an. Ändern Sie Akzentfarbe, Schriftart, Textgröße und KI-Verhalten.",
+                "visualization": "**Visualisierung:** Jeder Artikelabschnitt kann mit einzigartigen, KI-generierten Bildern und Videos zum Leben erweckt werden.",
+                "interconnection": "**Vernetzung:** Der Synapsen-Graph und der 'Kosmische Sprung' helfen Ihnen, unerwartete Verbindungen zwischen Themen zu entdecken."
+            },
+            "tech": {
+                "title": "Technologie",
+                "p1": "Nexus wird angetrieben von React, TypeScript und der Google Gemini API für modernste KI-Funktionen. Alle Ihre Daten werden sicher in der IndexedDB Ihres Browsers gespeichert."
+            },
+            "links": {
+                "title": "Links",
+                "aiStudio": "Live-Demo auf Google AI Studio",
+                "github": "Nexus auf GitHub ansehen"
+            }
+        }
+    },
+    "entry": {
+        "title": "Willkommen bei Nexus",
+        "subtitle": "Ihre persönliche Wissensmaschine. Entdecken, verstehen und verbinden Sie Ideen wie nie zuvor.",
+        "tutorial": {
+            "title": "Kurzanleitung",
+            "step1": {
+                "title": "1. Suchen & Entdecken",
+                "description": "Beginnen Sie mit einem Thema in der Suchleiste, wählen Sie einen Vorschlag oder wagen Sie einen Sprung ins Blaue mit 'Kosmischer Sprung'."
+            },
+            "step2": {
+                "title": "2. Interagieren & Verstehen",
+                "description": "Markieren Sie einen beliebigen Text für Definitionen, Erklärungen oder KI-Bilder. Nutzen Sie Zusammenfassungen, um komplexe Themen schnell zu erfassen."
+            },
+            "step3": {
+                "title": "3. KI-Copilot 'Athena'",
+                "description": "Stellen Sie Athena im rechten Panel Fragen zum Artikel. Sie hat den Kontext und hilft Ihnen, tiefer zu graben."
+            },
+            "step4": {
+                "title": "4. Wissen vernetzen",
+                "description": "Der 'Synapsen-Graph' am Ende jedes Artikels zeigt Ihnen verwandte Themen. Klicken Sie auf einen Knoten, um Ihre Reise fortzusetzen."
+            }
+        },
+        "startExploring": "Exploration starten"
+    },
+    "prompts": {
+        "snapshotName": "Geben Sie einen Namen für diesen Sitzungs-Schnappschuss ein:",
+        "confirmClearAll": "Sind Sie sicher, dass Sie alle {{name}} löschen möchten? Dies kann nicht rückgängig gemacht werden.",
+        "confirmDeletePath": "Sind Sie sicher, dass Sie den Lernpfad \"{{pathName}}\" löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
+    },
+    "notifications": {
+        "bookmarkRemoved": "Lesezeichen für \"{{topic}}\" entfernt.",
+        "bookmarkAdded": "\"{{topic}}\" zu Lesezeichen hinzugefügt.",
+        "articleAddedToPath": "\"{{articleTitle}}\" zum Lernpfad \"{{pathName}}\" hinzugefügt.",
+        "articleAlreadyInPath": "\"{{articleTitle}}\" ist bereits im Pfad \"{{pathName}}\" enthalten.",
+        "pathCreated": "Lernpfad \"{{pathName}}\" erstellt.",
+        "snapshotSaved": "Schnappschuss \"{{name}}\" gespeichert!",
+        "articleRemovedFromPath": "\"{{articleTitle}}\" wurde aus dem Pfad \"{{pathName}}\" entfernt.",
+        "pathDeleted": "Lernpfad \"{{pathName}}\" gelöscht.",
+        "clearedAll": "Alle {{name}} gelöscht.",
+        "exportSuccess": "Daten erfolgreich exportiert!",
+        "importSuccess": "Daten erfolgreich importiert!",
+        "allImagesGenerated": "Alle Bilder wurden bereits generiert.",
+        "imagesGeneratedSuccess": "{{count}} Bild(er) erfolgreich generiert.",
+        "imageEditedSuccess": "Bild erfolgreich bearbeitet!",
+        "videoGeneratedSuccess": "Video erfolgreich generiert!",
+        "findingConnection": "Suche nach einer überraschenden Verbindung...",
+        "cosmicLeapFound": "Kosmischer Sprung gefunden: {{topic}}",
+        "snapshotRestored": "Schnappschuss \"{{name}}\" wiederhergestellt.",
+        "installSuccess": "Nexus wurde erfolgreich installiert!",
+        "installDismissed": "Installation abgebrochen. Sie können Nexus später über die Einstellungen installieren."
+    },
+    "errors": {
+        "unknown": "Ein unbekannter Fehler ist aufgetreten.",
+        "articleCreationFailed": "Konnte keinen Artikel für \"{{topic}}\" erstellen.",
+        "imageGenerationFailed": "Konnte kein Bild generieren.",
+        "imageEditFailed": "Bildbearbeitung fehlgeschlagen.",
+        "imageGenSectionFailed": "Konnte kein Bild für \"{{section}}\" generieren.",
+        "videoGenerationFailed": "Videogenerierung fehlgeschlagen.",
+        "noPromptForVideo": "Dieser Abschnitt hat keinen Prompt für die Videogenerierung.",
+        "cosmicLeapFailed": "Konnte kein Thema für einen kosmischen Sprung finden.",
+        "fileRead": "Datei konnte nicht gelesen werden",
+        "invalidBackup": "Ungültige Backup-Dateistruktur.",
+        "importFailed": "Import der Daten fehlgeschlagen.",
+        "dbLoadFailed": "Bilder-Bibliothek konnte nicht aus der Datenbank geladen werden.",
+        "dbSaveFailed": "Bild konnte nicht in der Datenbank gespeichert werden.",
+        "dbDeleteFailed": "Bild konnte nicht aus der Datenbank gelöscht werden.",
+        "dbClearFailed": "Löschen der Bilder-Bibliothek ist fehlgeschlagen."
+    }
+}

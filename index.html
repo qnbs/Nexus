@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-t-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nexus - Knowledge, interconnected</title>
+    <meta name="description" content="Nexus is an AI-powered knowledge hub that reveals connections between ideas, turning learning into an immersive journey of discovery." />
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/icons/icon-192.svg" type="image/svg+xml">
+
+    <!-- PWA Manifest & iOS Support -->
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.svg">
+
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#111827">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Nexus - Knowledge, interconnected">
+    <meta property="og:description" content="An AI-powered knowledge hub that turns learning into an immersive journey of discovery.">
+    <!-- <meta property="og:image" content="URL_TO_A_PREVIEW_IMAGE"> -->
+    <!-- <meta property="og:url" content="URL_OF_THE_DEPLOYED_APP"> -->
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap');
+      
+      :root {
+        --accent-color: #f59e0b; /* amber-500 */
+        --accent-color-hover: #fbbf24; /* amber-400 */
+        --accent-text: #1f2937; /* gray-800 */
+      }
+      
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .font-artistic h1, .font-artistic h2, .font-artistic h3, .font-artistic h4, .font-artistic h5, .font-artistic h6 {
+        font-family: 'Lora', serif;
+      }
+      .font-artistic body, .font-artistic p, .font-artistic div, .font-artistic span, .font-artistic button, .font-artistic input {
+        font-family: 'Inter', sans-serif;
+      }
+
+      .font-modern {
+        font-family: 'Roboto', sans-serif;
+      }
+      .font-modern h1, .font-modern h2, .font-modern h3, .font-modern h4, .font-modern h5, .font-modern h6 {
+         font-weight: 700;
+      }
+
+      /* Custom accent color application */
+      .bg-accent { background-color: var(--accent-color); }
+      .hover\:bg-accent-hover:hover { background-color: var(--accent-color-hover); }
+      .text-accent { color: var(--accent-color); }
+      .hover\:text-accent-hover:hover { color: var(--accent-color-hover); }
+      .text-accent-contrast { color: var(--accent-text); }
+      .border-accent { border-color: var(--accent-color); }
+      .ring-accent { --tw-ring-color: var(--accent-color); }
+
+      /* Custom Scrollbar Styles */
+      ::-webkit-scrollbar {
+        width: 12px;
+        height: 12px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #111827; /* gray-900 */
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: #374151; /* gray-700 */
+        border-radius: 6px;
+        border: 3px solid #111827; /* gray-900 */
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: #4b5563; /* gray-600 */
+      }
+      
+      /* Table of Contents Styles */
+      .toc {
+        position: sticky;
+        top: 6rem; /* Adjust based on header height */
+        max-height: calc(100vh - 8rem);
+        overflow-y: auto;
+        transition: all 0.3s ease-in-out;
+      }
+      .toc-link {
+        transition: all 0.2s ease-in-out;
+        border-left: 2px solid transparent;
+      }
+      .toc-link.active {
+        color: var(--accent-color);
+        transform: translateX(4px);
+        border-left-color: var(--accent-color);
+      }
+      .toc-link.active .toc-dot {
+        background-color: var(--accent-color);
+        transform: scale(1.5);
+      }
+
+      /* Custom Animations */
+      @keyframes fadeInDown {
+        from { opacity: 0; transform: scale(0.95) translateY(-10px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+      }
+      .animate-fade-in-down {
+        animation: fadeInDown 0.15s ease-out forwards;
+      }
+      
+      /* Synapse Graph Animations */
+      @keyframes float {
+        0% { transform: translate(0, 0px); }
+        50% { transform: translate(0, 8px); }
+        100% { transform: translate(0, -0px); }
+      }
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+      
+      @keyframes pulse {
+        0%, 100% { 
+            transform: scale(1); 
+            box-shadow: 0 0 0 0 hsla(var(--accent-color) / 0.4);
+        }
+        70% { 
+            transform: scale(1.05); 
+            box-shadow: 0 0 0 10px hsla(var(--accent-color) / 0); 
+        }
+      }
+      .hover\:animate-pulse:hover, .focus\:animate-pulse:focus {
+         animation: pulse 2s infinite;
+      }
+
+      /* Logo Animations */
+      @keyframes rotate-logo {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      @keyframes pulse-logo-center {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+      }
+
+      .logo-rotator {
+        animation: rotate-logo 45s linear infinite;
+        transform-origin: center;
+      }
+
+      .logo-pulser {
+        animation: pulse-logo-center 5s ease-in-out infinite;
+        transform-origin: center;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.13.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-gray-900 text-gray-200">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
