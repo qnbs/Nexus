@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useLocalization } from '../context/LocalizationContext';
+import { ApiKeyNotFoundError } from '../../services/errors';
 
 interface UseVideoGenerationProps {
     onGenerateVideo: (sectionIndex: number, onStatusUpdate: (status: string) => void) => Promise<void>;
@@ -21,7 +22,7 @@ export const useVideoGeneration = ({ onGenerateVideo }: UseVideoGenerationProps)
         try {
             await onGenerateVideo(sectionIndex, onStatusUpdate);
         } catch (error: any) {
-            if (error.message === 'API_KEY_NOT_FOUND') {
+            if (error instanceof ApiKeyNotFoundError) {
                 setPendingVideoSectionIndex(sectionIndex);
                 setIsApiKeyModalVisible(true);
             } else {

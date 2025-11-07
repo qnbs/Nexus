@@ -3,12 +3,14 @@
 import { GoogleGenAI, Type, GenerateContentResponse, Chat, Modality, GenerateImagesResponse } from "@google/genai";
 import { ArticleData, RelatedTopic, ChatMessage, StarterTopic, AppSettings, SummaryType, Locale } from '../types';
 import { Prompts } from './prompts';
+import { ApiError, RateLimitError, OfflineError, JsonParseError, SafetyError, ApiKeyNotFoundError } from './errors';
 
-if (!process.env.API_KEY) {
-  throw new Error("API_KEY environment variable not set");
-}
-
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const getAi = () => {
+    // Creating a new instance each time ensures we use the latest key, 
+    // which is important for features like Veo where the key is selected by the user.
+    // The SDK will handle throwing an error if the API key is missing.
+    return new GoogleGenAI({ apiKey: process.env.API_KEY });
+};
 
 const callGeminiWithRetry = async <T,>(apiCall: () => Promise<T>, context: string, locale: Locale, maxRetries = 3, initialDelay = 2000): Promise<T> => {
     const errorMessages = {
@@ -26,7 +28,7 @@ const callGeminiWithRetry = async <T,>(apiCall: () => Promise<T>, context: strin
     const messages = errorMessages[locale] || errorMessages.en;
 
     if (!navigator.onLine) {
-        throw new Error(messages.offline);
+        throw new OfflineError(messages.offline);
     }
 
     for (let attempt = 0; attempt < maxRetries; attempt++) {
@@ -39,19 +41,19 @@ const callGeminiWithRetry = async <T,>(apiCall: () => Promise<T>, context: strin
             if (isRateLimitError) {
                 if (attempt === maxRetries - 1) {
                     console.error(`[${context}] Final attempt failed due to rate limiting.`);
-                    throw new Error(messages.rateLimit);
+                    throw new RateLimitError(messages.rateLimit);
                 }
                 const delay = initialDelay * Math.pow(2, attempt) + Math.random() * 1000; // Exponential backoff with jitter
                 console.warn(`[${context}] Rate limit hit. Retrying in ${Math.round(delay / 1000)}s... (Attempt ${attempt + 1}/${maxRetries})`);
                 await new Promise(resolve => setTimeout(resolve, delay));
             } else {
                 console.error(`[${context}] Non-retryable error:`, error);
-                if (error instanceof Error) throw error;
-                throw new Error(errorMessage);
+                if (error instanceof ApiError) throw error;
+                throw new ApiError(errorMessage);
             }
         }
     }
-    throw new Error(messages.maxRetries);
+    throw new ApiError(messages.maxRetries);
 };
 
 const timelineEventSchema = {
@@ -136,14 +138,14 @@ const parseJsonResponse = <T,>(jsonText: string, context: string, locale: Locale
             ? `Inhalt für ${context} konnte nicht geparst werden. Die KI-Antwort war kein gültiges JSON.`
             : `Could not parse content for ${context}. The AI response was not valid JSON.`;
         console.error(`Error parsing JSON for ${context}:`, error, "Raw text:", jsonText);
-        throw new Error(message);
+        throw new JsonParseError(message);
     }
 }
 
 export const generateArticleContent = async (topic: string, settings: AppSettings, locale: Locale): Promise<ArticleData> => {
   try {
     const prompt = Prompts.generateArticle(locale, topic, settings);
-    const response = await callGeminiWithRetry<GenerateContentResponse>(() => ai.models.generateContent({
+    const response = await callGeminiWithRetry<GenerateContentResponse>(() => getAi().models.generateContent({
       model: "gemini-2.5-flash",
       contents: { parts: [{ text: prompt }] },
       config: {
@@ -159,17 +161,15 @@ export const generateArticleContent = async (topic: string, settings: AppSetting
          const safetyMessage = locale === 'de'
             ? `Das Thema "${topic}" hat einen Sicherheitsfilter ausgelöst. Bitte versuchen Sie ein anderes Thema.`
             : `The topic "${topic}" triggered a safety filter. Please try another topic.`;
-         throw new Error(safetyMessage);
+         throw new SafetyError(safetyMessage);
     }
-    // Re-throw already translated/specific errors from retry wrapper or JSON parser
-    if (message.includes("API") || message.includes("offline") || message.includes("JSON")) {
-        if (error instanceof Error) throw error;
-        else throw new Error(message);
-    }
+
+    if (error instanceof ApiError) throw error;
+    
     const defaultMessage = locale === 'de'
         ? `Fehler beim Erstellen des Artikels für "${topic}". Das Thema ist möglicherweise zu breit, zweideutig oder eingeschränkt.`
         : `Failed to create article for "${topic}". The topic may be too broad, ambiguous, or restricted.`;
-    throw new Error(defaultMessage);
+    throw new ApiError(defaultMessage);
   }
 };
 
@@ -181,7 +181,7 @@ export const generateImageForSection = async (prompt: string, settings: AppSetti
     if (!prompt) return '';
     try {
         const fullPrompt = constructImagePrompt(prompt, settings, locale);
-        const response = await callGeminiWithRetry<GenerateImagesResponse>(() => ai.models.generateImages({
+        const response = await callGeminiWithRetry<GenerateImagesResponse>(() => getAi().models.generateImages({
             model: 'imagen-4.0-generate-001',
             prompt: fullPrompt,
             config: {
@@ -199,15 +199,14 @@ export const generateImageForSection = async (prompt: string, settings: AppSetti
         console.error('Error generating image for prompt "', prompt, '":', error);
         const message = error instanceof Error ? error.message : String(error);
 
-        if (message.includes("API") || message.includes("offline")) {
-            if (error instanceof Error) throw error;
-            else throw new Error(message);
-        }
+        if (error instanceof ApiError) throw error;
+        
         const safetyMessage = locale === 'de' ? 'Die Anweisung hat einen Sicherheitsfilter ausgelöst.' : 'The prompt triggered a safety filter.';
         const complexMessage = locale === 'de' ? 'Der Prompt könnte zu komplex oder eingeschränkt sein.' : 'The prompt may be too complex.';
-        const errorMessage = message.includes('SAFETY') ? safetyMessage : complexMessage;
-        const finalMessage = locale === 'de' ? `Bilderzeugung fehlgeschlagen. ${errorMessage}` : `Image generation failed. ${errorMessage}`;
-        throw new Error(finalMessage);
+        const errorMessage = message.includes('SAFETY') ? new SafetyError(safetyMessage) : new ApiError(complexMessage);
+        
+        const finalMessage = locale === 'de' ? `Bilderzeugung fehlgeschlagen. ${errorMessage.message}` : `Image generation failed. ${errorMessage.message}`;
+        throw new ApiError(finalMessage);
     }
 }
 
@@ -289,14 +288,13 @@ export const generateVideoForSection = async (
         const message = error instanceof Error ? error.message : String(error);
         console.error('Error generating video for prompt "', prompt, '":', error);
         if (message.includes("Requested entity was not found.")) {
-             throw new Error("API_KEY_NOT_FOUND");
+             throw new ApiKeyNotFoundError("API key not found or invalid.");
         }
-        if (message.includes("API") || message.includes("offline")) {
-             if (error instanceof Error) throw error;
-             else throw new Error(message);
-        }
+        
+        if (error instanceof ApiError) throw error;
+
         const finalMessage = locale === 'de' ? `Videogenerierung fehlgeschlagen: ${message}` : `Video generation failed: ${message}`;
-        throw new Error(finalMessage);
+        throw new ApiError(finalMessage);
     }
 };
 
@@ -326,7 +324,7 @@ export const editImage = async (
 
         const textPart = { text: prompt };
 
-        const response = await callGeminiWithRetry<GenerateContentResponse>(() => ai.models.generateContent({
+        const response = await callGeminiWithRetry<GenerateContentResponse>(() => getAi().models.generateContent({
             model: 'gemini-2.5-flash-image',
             contents: { parts: [imagePart, textPart] },
             config: {
@@ -348,15 +346,15 @@ export const editImage = async (
     } catch(error: unknown) {
         console.error('Error editing image for prompt "', prompt, '":', error);
         const message = error instanceof Error ? error.message : String(error);
-        if (message.includes("API") || message.includes("offline")) {
-             if (error instanceof Error) throw error;
-             else throw new Error(message);
-        }
+        
+        if (error instanceof ApiError) throw error;
+        
         const safetyMessage = locale === 'de' ? 'Die Anweisung hat einen Sicherheitsfilter ausgelöst.' : 'The prompt triggered a safety filter.';
         const complexMessage = locale === 'de' ? 'Der Prompt könnte zu komplex sein.' : 'The prompt may be too complex.';
-        const errorMessage = message.includes('SAFETY') ? safetyMessage : complexMessage;
-        const finalMessage = locale === 'de' ? `Bildbearbeitung fehlgeschlagen. ${errorMessage}` : `Image editing failed. ${errorMessage}`;
-        throw new Error(finalMessage);
+        const errorMessage = message.includes('SAFETY') ? new SafetyError(safetyMessage) : new ApiError(complexMessage);
+
+        const finalMessage = locale === 'de' ? `Bildbearbeitung fehlgeschlagen. ${errorMessage.message}` : `Image editing failed. ${errorMessage.message}`;
+        throw new ApiError(finalMessage);
     }
 };
 
@@ -376,7 +374,7 @@ export const explainOrDefine = async (
         : Prompts.explainText(locale, text);
         
     try {
-        const response = await callGeminiWithRetry<GenerateContentResponse>(() => ai.models.generateContent({
+        const response = await callGeminiWithRetry<GenerateContentResponse>(() => getAi().models.generateContent({
             model: 'gemini-2.5-flash',
             contents: { parts: [{ text: prompt }] },
             config: {
@@ -388,20 +386,17 @@ export const explainOrDefine = async (
         return result.response;
     } catch (error: unknown) {
         console.error(`Error during ${mode} for "${text}":`, error);
-        const message = error instanceof Error ? error.message : String(error);
-        if (message.includes("API") || message.includes("offline") || message.includes("JSON")) {
-            if (error instanceof Error) throw error;
-            else throw new Error(message);
-        }
+        if (error instanceof ApiError) throw error;
+
         const defaultMessage = locale === 'de' ? `Konnte Aktion nicht ausführen: ${mode}` : `Could not perform action: ${mode}`;
-        throw new Error(defaultMessage);
+        throw new ApiError(defaultMessage);
     }
 };
 
 export const getRelatedTopics = async (topic: string, settings: AppSettings, locale: Locale): Promise<RelatedTopic[]> => {
     try {
         const prompt = Prompts.getRelatedTopics(locale, topic, settings);
-        const response = await callGeminiWithRetry<GenerateContentResponse>(() => ai.models.generateContent({
+        const response = await callGeminiWithRetry<GenerateContentResponse>(() => getAi().models.generateContent({
             model: "gemini-2.5-flash",
             contents: { parts: [{ text: prompt }] },
             config: {
@@ -412,20 +407,17 @@ export const getRelatedTopics = async (topic: string, settings: AppSettings, loc
         return parseJsonResponse<RelatedTopic[]>(response.text, "related topics", locale);
     } catch (error: unknown) {
         console.error("Error generating related topics:", error);
-        const message = error instanceof Error ? error.message : String(error);
-         if (message.includes("API") || message.includes("offline") || message.includes("JSON")) {
-            if (error instanceof Error) throw error;
-            else throw new Error(message);
-        }
+        if (error instanceof ApiError) throw error;
+
         const defaultMessage = locale === 'de' ? "Fehler beim Generieren verwandter Themen." : "Failed to generate related topics.";
-        throw new Error(defaultMessage);
+        throw new ApiError(defaultMessage);
     }
 };
 
 export const getSerendipitousTopic = async (currentTopic: string, locale: Locale): Promise<string> => {
      try {
         const prompt = Prompts.getSerendipitousTopic(locale, currentTopic);
-        const response = await callGeminiWithRetry<GenerateContentResponse>(() => ai.models.generateContent({
+        const response = await callGeminiWithRetry<GenerateContentResponse>(() => getAi().models.generateContent({
             model: "gemini-2.5-flash",
             contents: { parts: [{ text: prompt }] },
             config: {
@@ -437,13 +429,10 @@ export const getSerendipitousTopic = async (currentTopic: string, locale: Locale
         return result.topic;
     } catch (error: unknown) {
         console.error("Error generating serendipitous topic:", error);
-        const message = error instanceof Error ? error.message : String(error);
-        if (message.includes("API") || message.includes("offline") || message.includes("JSON")) {
-            if (error instanceof Error) throw error;
-            else throw new Error(message);
-        }
+        if (error instanceof ApiError) throw error;
+
         const defaultMessage = locale === 'de' ? "Fehler beim Generieren eines Kosmischer Sprung-Themas." : "Failed to generate a Cosmic Leap topic.";
-        throw new Error(defaultMessage);
+        throw new ApiError(defaultMessage);
     }
 }
 
@@ -459,7 +448,7 @@ export const getStarterTopics = (t: (key: string, params?: { [key: string]: stri
 export const generateSummary = async (articleText: string, type: SummaryType, locale: Locale): Promise<string> => {
     const prompt = Prompts.generateSummary(locale, type, articleText);
     try {
-        const response = await callGeminiWithRetry<GenerateContentResponse>(() => ai.models.generateContent({
+        const response = await callGeminiWithRetry<GenerateContentResponse>(() => getAi().models.generateContent({
             model: 'gemini-2.5-flash',
             contents: { parts: [{ text: prompt }] },
             config: {
@@ -471,20 +460,17 @@ export const generateSummary = async (articleText: string, type: SummaryType, lo
         return result.response;
     } catch (error: unknown) {
         console.error(`Error generating summary type ${type}:`, error);
-        const message = error instanceof Error ? error.message : String(error);
-        if (message.includes("API") || message.includes("offline") || message.includes("JSON")) {
-            if (error instanceof Error) throw error;
-            else throw new Error(message);
-        }
+        if (error instanceof ApiError) throw error;
+        
         const defaultMessage = locale === 'de' ? `Zusammenfassung konnte nicht generiert werden: ${type}` : `Could not generate summary: ${type}`;
-        throw new Error(defaultMessage);
+        throw new ApiError(defaultMessage);
     }
 };
 
 export const getSuggestedQuestions = async (articleText: string, locale: Locale, t: (key: string, params?: { [key: string]: string | number | undefined }) => any): Promise<string[]> => {
     try {
         const prompt = Prompts.getSuggestedQuestions(locale, articleText);
-        const response = await callGeminiWithRetry<GenerateContentResponse>(() => ai.models.generateContent({
+        const response = await callGeminiWithRetry<GenerateContentResponse>(() => getAi().models.generateContent({
             model: "gemini-2.5-flash",
             contents: { parts: [{ text: prompt }] },
             config: {
@@ -511,7 +497,7 @@ export const startChat = (
 ): Chat => {
     const systemInstruction = t('athena.systemInstruction', { articleContext, previousArticlesContext });
 
-    return ai.chats.create({
+    return getAi().chats.create({
         model: 'gemini-2.5-flash',
         config: {
             systemInstruction: systemInstruction,

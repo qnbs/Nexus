@@ -1,4 +1,4 @@
-import React, { useState, DragEvent, useRef } from 'react';
+import React, { useState, DragEvent } from 'react';
 import { useNexus } from '../context/NexusContext';
 import { useLocalization } from '../context/LocalizationContext';
 import { ChevronDownIcon, ReorderIcon, TrashIcon, BookOpenIcon, PathIcon } from './IconComponents';
@@ -15,42 +15,38 @@ const LearningPathsManager: React.FC<LearningPathsManagerProps> = ({ handleSearc
     const { t } = useLocalization();
     const [openPath, setOpenPath] = useState<string | null>(learningPaths.length > 0 ? learningPaths[0].name : null);
     
-    const dragItem = useRef<{ pathName: string; index: number } | null>(null);
-    const dragOverItem = useRef<{ pathName: string; index: number } | null>(null);
+    const [draggedItem, setDraggedItem] = useState<{ pathName: string; index: number } | null>(null);
+    const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
 
     const handleDragStart = (e: DragEvent<HTMLLIElement>, pathName: string, index: number) => {
-        dragItem.current = { pathName, index };
+        setDraggedItem({ pathName, index });
         e.dataTransfer.effectAllowed = 'move';
-        // Minor visual tweak for Firefox
-        if (e.dataTransfer.setDragImage) {
-            e.dataTransfer.setDragImage(e.currentTarget, 20, 20);
+    };
+    
+    const handleDragEnter = (pathName: string, index: number) => {
+        if (draggedItem && draggedItem.pathName === pathName && draggedItem.index !== index) {
+            setDragOverIndex(index);
         }
     };
     
-    const handleDragEnter = (e: DragEvent<HTMLLIElement>, pathName: string, index: number) => {
-        e.preventDefault();
-        if (dragItem.current?.pathName === pathName) {
-            dragOverItem.current = { pathName, index };
-            // Force a re-render to show the indicator
-            e.currentTarget.parentElement?.setAttribute('data-drag-over', 'true');
+    const handleDrop = (pathName: string, dropIndex: number) => {
+        if (!draggedItem || draggedItem.pathName !== pathName || draggedItem.index === dropIndex) {
+            return;
         }
+
+        dispatch({ 
+            type: 'REORDER_ARTICLES', 
+            payload: { 
+                pathName: draggedItem.pathName, 
+                startIndex: draggedItem.index, 
+                endIndex: dropIndex
+            } 
+        });
     };
-    
-    const handleDragEnd = (e: DragEvent<HTMLLIElement>) => {
-        if (!dragItem.current || !dragOverItem.current) return;
-        if (dragItem.current.pathName === dragOverItem.current.pathName) {
-            dispatch({ 
-                type: 'REORDER_ARTICLES', 
-                payload: { 
-                    pathName: dragItem.current.pathName, 
-                    startIndex: dragItem.current.index, 
-                    endIndex: dragOverItem.current.index 
-                } 
-            });
-        }
-        dragItem.current = null;
-        dragOverItem.current = null;
-        e.currentTarget.parentElement?.removeAttribute('data-drag-over');
+
+    const handleDragEnd = () => {
+        setDraggedItem(null);
+        setDragOverIndex(null);
     };
 
     const handleDragOver = (e: DragEvent<HTMLLIElement>) => {
@@ -117,12 +113,13 @@ const LearningPathsManager: React.FC<LearningPathsManagerProps> = ({ handleSearc
                                                 key={article.title}
                                                 draggable
                                                 onDragStart={(e) => handleDragStart(e, path.name, index)}
-                                                onDragEnter={(e) => handleDragEnter(e, path.name, index)}
+                                                onDragEnter={() => handleDragEnter(path.name, index)}
                                                 onDragEnd={handleDragEnd}
                                                 onDragOver={handleDragOver}
-                                                className={`relative flex items-center gap-2 p-2 rounded-md group bg-gray-700/50 transition-all ${dragItem.current?.index === index && dragItem.current.pathName === path.name ? 'opacity-50' : ''}`}
+                                                onDrop={() => handleDrop(path.name, index)}
+                                                className={`relative flex items-center gap-2 p-2 rounded-md group bg-gray-700/50 transition-all ${draggedItem?.index === index && draggedItem.pathName === path.name ? 'opacity-50' : ''}`}
                                             >
-                                                {dragOverItem.current?.index === index && dragOverItem.current?.pathName === path.name && (
+                                                {dragOverIndex === index && (
                                                     <div className="absolute top-0 left-2 right-2 h-0.5 bg-accent rounded-full" />
                                                 )}
                                                 <div className="flex items-center">
