@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useLocalization } from '../context/LocalizationContext';
-import { ApiKeyNotFoundError } from '../../services/errors';
+import { ApiKeyNotFoundError } from '../services/errors';
 
 interface UseVideoGenerationProps {
     onGenerateVideo: (sectionIndex: number, onStatusUpdate: (status: string) => void) => Promise<void>;
