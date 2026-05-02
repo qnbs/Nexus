@@ -1,0 +1,17 @@
+---
+description: Nexus — Konventionen und Cursor-Hinweise für dieses Repo
+globs: "**/*"
+alwaysApply: true
+---
+
+# Nexus (React + Vite + TypeScript)
+
+- **Stack:** React 18, TypeScript, Vite 6, Tailwind per CDN in `index.html`, Gemini über `@google/genai`.
+- **Statische PWA-Dateien:** liegen unter `public/` (`manifest.webmanifest`, `sw.js`, `icons/`). Werden unverändert nach `dist/` kopiert.
+- **Pfad-Alias:** `@/*` → Projektroot (`vite.config.ts`, `tsconfig.json`).
+- **i18n:** Nur Schlüssel aus `locales/de.json` und `locales/en.json`; beide Dateien synchron halten.
+- **State:** `useReducer` + Context; Business-Logik in `hooks/`, API in `services/`.
+- **Qualität:** `npm run ci` = typecheck + eslint + build; vor Push lokal ausführen.
+- **API-Key:** `.env` mit `GEMINI_API_KEY` (siehe `.env.example`); rein clientseitig eingebettet (AI-Studio-Modell).
+
+Antworten im Chat mit dem Nutzer bevorzugt auf **Deutsch**, Code-Kommentare und UI-Strings gemäß bestehendem Projekt (EN/DE über Locale-Dateien).

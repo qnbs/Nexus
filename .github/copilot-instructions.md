@@ -41,7 +41,7 @@ index.tsx → NexusProvider → App → MainLayout → Components
 | `services/` | API services, DB abstraction, error classes, prompt templates |
 | `state/` | Root reducer + feature-specific sub-reducers |
 | `locales/` | Translation JSON files (de.json, en.json) |
-| `icons/` | PWA SVG icons |
+| `public/` | Static assets: PWA manifest, service worker, `icons/*.svg` |
 
 ## Code Conventions
 
@@ -79,12 +79,18 @@ index.tsx → NexusProvider → App → MainLayout → Components
 ## Build & Dev
 
 ```bash
+npm ci           # Reproducible install (uses package-lock.json)
 npm run dev      # Start dev server on port 3000
 npm run build    # Production build to dist/
 npm run preview  # Preview production build
+npm run typecheck # tsc --noEmit
+npm run lint     # ESLint (flat config)
+npm run ci       # typecheck + lint + build (same as GitHub Actions)
 ```
 
 **Environment:** Copy `.env.example` to `.env` and set `GEMINI_API_KEY`.
+
+**Static / PWA files:** Keep `manifest.webmanifest`, `sw.js`, and icons under `public/` — Vite copies them to `dist/` root unchanged.
 
 ## Known Architectural Limitations
 

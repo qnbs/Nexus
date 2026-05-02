@@ -167,18 +167,14 @@ export const useArticleManager = (deps: UseArticleManagerDeps) => {
             throw new Error(errorMessage);
         }
 
-        try {
-            const videoUrl = await geminiService.generateVideoForSection(section.imagePrompt, settings, locale, onStatusUpdate);
-            setArticle(prev => {
-                if (!prev) return null;
-                const newSections = [...prev.sections];
-                newSections[sectionIndex].videoUrl = videoUrl;
-                return { ...prev, sections: newSections };
-            });
-            addNotification(t('notifications.videoGeneratedSuccess'), 'success');
-        } catch (error: any) {
-             throw error;
-        }
+        const videoUrl = await geminiService.generateVideoForSection(section.imagePrompt, settings, locale, onStatusUpdate);
+        setArticle((prev) => {
+            if (!prev) return null;
+            const newSections = [...prev.sections];
+            newSections[sectionIndex].videoUrl = videoUrl;
+            return { ...prev, sections: newSections };
+        });
+        addNotification(t('notifications.videoGeneratedSuccess'), 'success');
     }, [article, settings, locale, addNotification, t]);
 
     const handleSaveSnapshot = () => {

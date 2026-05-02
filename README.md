@@ -69,6 +69,23 @@ Experience the full power of Nexus instantly, with no setup required. This live 
 -   **Client-Side Storage:** Browser **IndexedDB** is used for a persistent, high-capacity, and offline-capable database for all user data.
 -   **Progressive Web App (PWA):** Fully installable with offline caching capabilities via a dedicated Service Worker.
 
+### Local development
+
+| Requirement | Notes |
+|-------------|--------|
+| Node.js | 20+ recommended; CI uses 22 |
+| API key | `GEMINI_API_KEY` in `.env` (see `.env.example`) |
+
+```bash
+npm ci          # reproducible install (lockfile committed)
+npm run dev     # http://localhost:3000
+npm run ci      # typecheck + eslint + production build (same as GitHub Actions)
+```
+
+**Project layout (short):** `components/`, `hooks/`, `context/`, `services/`, `state/`, `locales/`. **Static PWA files** (`manifest.webmanifest`, `sw.js`, `icons/`) live in `public/` and are copied to `dist/` unchanged.
+
+**Tooling:** TypeScript (`npm run typecheck`), ESLint 9 flat config (`eslint.config.js`), EditorConfig, Cursor rules under `.cursor/rules/`.
+
 ---
 <a name="deutsch"></a>
 ## Deutsch
@@ -91,7 +108,7 @@ Nexus ist mit einer Reihe hochmoderner Funktionen ausgestattet, um die Wissenser
 -   **✍️ Echtzeit-Artikelsynthese:** Geben Sie ein beliebiges Thema ein und erhalten Sie einen umfassenden, enzyklopädischen Artikel, der in Echtzeit von **`gemini-2.5-flash`** generiert wird. Passen Sie die Ausgabe mit anpassbaren Tiefeneinstellungen (Kompakt, Standard, Ausführlich) an.
 -   **🎨 Generative Visualisierungen:** Jeder Artikelabschnitt ist mit einem kontextrelevanten Bild-Prompt versehen. Erwecken Sie ihn mit einem einzigartigen, von **`imagen-4.0-generate-001`** generierten KI-Bild zum Leben, dessen Stile von Fotorealistisch bis Künstlerisch reichen.
 -   **🎬 Sofortige Videoerstellung:** Steigern Sie das Verständnis, indem Sie für jeden Abschnitt kurze, dynamische Videoclips mit **`veo-3.1-fast-generate-preview`** generieren und so statische Beschreibungen in Bewegung umwandeln.
--   **📊 Facettenreiche Zusammenfassungen:** Destillieren Sie komplexe Artikel sofort in verdauliche Formate mit einem einzigen Klick: **Zfsg.** (TL;DR), **EWI5** (Erkläre wie ich 5 bin), **Kernaussagen** oder eine konzeptionelle **Analogie**.
+-   **📊 Facettenreiche Zusammenfassungen:** Destillieren Sie komplexe Artikel sofort in verdauliche Formate mit einem einzigen Klick: **TL;DR**, **ELI5** (Erkläre wie ich 5 bin), **Kernaussagen** oder eine konzeptionelle **Analogie**.
 
 #### Interaktives Lernen & Erkunden
 -   **🔍 Kontextbezogene Intelligenzwerkzeuge:** Markieren Sie einen beliebigen Text in einem Artikel, um ein kontextbezogenes Toolkit zu aktivieren:
@@ -134,3 +151,20 @@ Erleben Sie die volle Leistung von Nexus sofort und ohne jegliche Einrichtung. D
     -   **Hochwertige Videogenerierung:** `veo-3.1-fast-generate-preview`
 -   **Client-seitiger Speicher:** Browser **IndexedDB** wird für eine persistente, kapazitätsstarke und offline-fähige Datenbank für alle Benutzerdaten verwendet.
 -   **Progressive Web App (PWA):** Vollständig installierbar mit Offline-Caching-Funktionen über einen dedizierten Service Worker.
+
+### Lokale Entwicklung
+
+| Voraussetzung | Hinweis |
+|---------------|--------|
+| Node.js | 20+ empfohlen; CI nutzt 22 |
+| API-Schlüssel | `GEMINI_API_KEY` in `.env` (siehe `.env.example`) |
+
+```bash
+npm ci          # reproduzierbarer Install (Lockfile im Repo)
+npm run dev     # http://localhost:3000
+npm run ci      # Typecheck + ESLint + Production-Build (wie GitHub Actions)
+```
+
+**Projektstruktur (kurz):** `components/`, `hooks/`, `context/`, `services/`, `state/`, `locales/`. **Statische PWA-Dateien** (`manifest.webmanifest`, `sw.js`, `icons/`) liegen in `public/` und werden unverändert nach `dist/` kopiert.
+
+**Werkzeuge:** TypeScript (`npm run typecheck`), ESLint 9 (`eslint.config.js`), EditorConfig, Cursor-Regeln unter `.cursor/rules/`.

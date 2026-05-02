@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- GitHub Actions CI (`.github/workflows/ci.yml`): `npm ci`, typecheck, ESLint, production build.
+- ESLint 9 flat config (`eslint.config.js`), scripts `typecheck`, `lint`, `ci`.
+- `public/` directory with `manifest.webmanifest`, `sw.js`, and `icons/` for correct Vite static output and installable PWA in `dist/`.
+- `.editorconfig`, `.vscode/extensions.json` (ESLint, EditorConfig), `.cursor/rules/nexus.mdc` for Cursor.
+
+### Changed
+
+- `.gitignore`: track `package-lock.json`; allow committing `.vscode/extensions.json`.
+- README: local development / Lokale Entwicklung sections; German summary labels aligned (TL;DR / ELI5).
+- `AUDIT.md`: revised scores and infrastructure section for post-CI state.
+
+### Fixed
+
+- Production builds previously omitted service worker and manifest at predictable URLs; resolved via `public/` assets.
+
 ## [1.0.0] - 2026-04-14
 
 ### Added
